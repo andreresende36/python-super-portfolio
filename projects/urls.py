@@ -1,10 +1,18 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from .views import (
     ProfileListCreateView,
     ProfileRetrieveUpdateDestroyView,
     ProjectListCreateView,
     ProjectRetrieveUpdateDestroyView,
+    CertificateViewSet,
+    CertifyingInstitutionViewSet,
+    AuthRequiredView,
 )
+
+router = DefaultRouter()
+router.register(r"certifying-institutions", CertifyingInstitutionViewSet)
+router.register(r"certificates", CertificateViewSet)
 
 urlpatterns = [
     path(
@@ -27,4 +35,6 @@ urlpatterns = [
         ProjectRetrieveUpdateDestroyView.as_view(),
         name="project-retrieve-update-destroy",
     ),
+    path("", include(router.urls)),
+    path('auth-required/', AuthRequiredView.as_view(), name='auth-required'),
 ]
