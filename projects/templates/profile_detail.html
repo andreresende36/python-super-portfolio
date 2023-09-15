@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Profile</title>
+</head>
+
+<body>
+  <h1>Profile Detail</h1>
+  <p>Name: {{ profile.name }}</p>
+  <p>GitHub: <a href="{{ profile.github }}">{{ profile.github }}</a></p>
+  <p>LinkedIn: <a href="{{ profile.linkedin }}">{{ profile.linkedin }}</a></p>
+  <p>Bio: {{ profile.bio }}</p>
+
+  <h2>Projects</h2>
+  <ul>
+    {% for project in profile.projects.all %}
+      <li>{{ project.name }}</li>
+      <p>Description: {{ project.description }}</p>
+      <p>Github URL: {{ project.github_url }}</p>
+      <p>Keyword: {{ project.keyword }}</p>
+      <p>Key Skill: {{ project.key_skill }}</p>
+    {% endfor %}
+  </ul>
+</body>
+
+</html>
