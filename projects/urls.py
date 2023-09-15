@@ -1,5 +1,10 @@
 from django.urls import path
-from .views import ProfileListCreateView, ProfileRetrieveUpdateDestroyView
+from .views import (
+    ProfileListCreateView,
+    ProfileRetrieveUpdateDestroyView,
+    ProjectListCreateView,
+    ProjectRetrieveUpdateDestroyView,
+)
 
 urlpatterns = [
     path(
@@ -11,5 +16,15 @@ urlpatterns = [
         "profiles/<int:pk>/",
         ProfileRetrieveUpdateDestroyView.as_view(),
         name="profile-retrieve-update-destroy",
+    ),
+    path(
+        "projects/",
+        ProjectListCreateView.as_view(),
+        name="project-list-create",
+    ),
+    path(
+        "projects/<int:pk>/",
+        ProjectRetrieveUpdateDestroyView.as_view(),
+        name="project-retrieve-update-destroy",
     ),
 ]

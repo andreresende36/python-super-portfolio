@@ -1,8 +1,11 @@
 # from django.shortcuts import render
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import Profile
-from .serializers import ProfileSerializer
+from rest_framework.permissions import (
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated,
+)
+from .models import Profile, Project
+from .serializers import ProfileSerializer, ProjectSerializer
 from django.shortcuts import render
 
 
@@ -26,3 +29,15 @@ class ProfileRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
             self.template_name,
             {"profile": instance, "serializer": serializer},
         )
+
+
+class ProjectListCreateView(generics.ListCreateAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class ProjectRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated]
