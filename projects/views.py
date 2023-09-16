@@ -16,13 +16,6 @@ from .serializers import (
 from django.shortcuts import render
 
 
-class AuthRequiredView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        return Response({"message": "Você está autenticado!"})
-
-
 class ProfileBaseView(generics.GenericAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer

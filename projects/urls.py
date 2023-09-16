@@ -7,7 +7,6 @@ from .views import (
     ProjectRetrieveUpdateDestroyView,
     CertificateViewSet,
     CertifyingInstitutionViewSet,
-    AuthRequiredView,
 )
 
 router = DefaultRouter()
@@ -36,5 +35,9 @@ urlpatterns = [
         name="project-retrieve-update-destroy",
     ),
     path("", include(router.urls)),
-    path('auth-required/', AuthRequiredView.as_view(), name='auth-required'),
+    path(
+        "profiles/<int:pk>/",
+        ProfileRetrieveUpdateDestroyView.as_view(),
+        name="profile-detail",
+    ),
 ]
